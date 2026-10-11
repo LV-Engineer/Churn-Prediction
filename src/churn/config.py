@@ -15,3 +15,7 @@ CAT_COLS = [
 ]
 NUM_COLS = ["Tenure Months", "Monthly Charges", "Total Charges"]
 MODEL_NUM_COLS = ["Tenure Months", "Monthly Charges"]
+
+LOSS_IF_CHURN = 890      # V
+OFFER_COST = 20          # c
+SAVE_RATE = 0.30         # p
