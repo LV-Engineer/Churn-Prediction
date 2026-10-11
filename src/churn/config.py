@@ -14,4 +14,4 @@ CAT_COLS = [
     "Contract", "Paperless Billing", "Payment Method",
 ]
 
-NOT_FEATURES = ["CLTV"]
+NOT_FEATURES = ["CLTV", "Total Charges"]
