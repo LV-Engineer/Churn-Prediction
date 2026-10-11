@@ -5,3 +5,6 @@ data/raw/
 models/
 *.pkl
 .env
+
+data/*
+!data/README.md
