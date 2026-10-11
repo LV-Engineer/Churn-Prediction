@@ -32,7 +32,7 @@ Repo: https://github.com/LV-Engineer/Churn-Prediction
 | Classical ML | scikit-learn (Pipeline, LogisticRegression, RandomForest, cross-validation, tuning), XGBoost |
 | Neural network | PyTorch (MLP) |
 | Interpretation | feature importance, SHAP (optional) |
-| Environment | Jupyter Notebook, venv, requirements.txt |
+| Environment | Jupyter Notebook, uv, pyproject.toml, uv.lock |
 | Version control | Git, GitHub (README with the 5-part structure) |
 | Statistics | A/B test design: hypothesis test, sample size (scipy / statsmodels) |
 
