@@ -45,7 +45,14 @@ Repo: https://github.com/LV-Engineer/Churn-Prediction
 * Metric choice and why: ROC-AUC to compare models (does not depend on the threshold and is not distorted by the 26.5% class share); recall and precision to see the trade-off at a threshold; expected profit to make the decision. Accuracy is not used: always predicting "stayed" already gives about 73%.
 * Threshold selection: chosen by expected profit on out-of-fold probabilities of train, using the simulated cost assumptions; break-even point is c / (p x V) = 20 / (0.3 x 890), about 0.075.
 * Interpretation: logistic regression coefficients (log-odds and odds ratios, numeric features scaled) and permutation importance on the test set (drop in ROC-AUC when one original column is shuffled). SHAP was not used.
-* A/B test design (retention offer): [control vs treatment groups, success metric, sample size / power, hypothesis test, decision rule]. Design only, no real experiment data
+* A/B test design (retention offer): design only, no real experiment data.
+  * Question: does the retention offer lower churn among the customers the model flags (probability above the threshold 0.05, about 71% of customers)?
+  * Groups: flagged customers are randomly split 50/50 at customer level into treatment (receives the offer) and control (receives nothing).
+  * Success metric: share of customers who churn during the observation period (one quarter, as in the dataset).
+  * Hypothesis test: two-sided test of two proportions, significance level 0.05, power 0.8. H0: churn share is the same in both groups.
+  * Effect sizes (simulated): baseline churn among flagged customers is about 36.9% (precision on the test set). Under the assumed 30% save rate it would fall to about 25.8% (11.1 percentage points). The break-even reduction is c / V = 20 / 890, about 2.25 percentage points.
+  * Sample size per group (two-proportion test): about 272 to detect the assumed effect, about 1148 to detect half of it, about 7139 to detect the break-even effect.
+  * Decision rule: roll the offer out only if the difference is statistically significant and the reduction in churn is at least the break-even 2.25 percentage points; a smaller significant effect does not cover the cost of the offer.
 
 # Results
 
@@ -53,7 +60,7 @@ Repo: https://github.com/LV-Engineer/Churn-Prediction
 * Key drivers of churn: five features carry almost all the signal (drop in test ROC-AUC when shuffled): `Tenure Months` (about 0.08), `Dependents` (0.04), `Contract` (0.03), `Internet Service` (0.03), `Monthly Charges` (0.02); the other features add 0.003 or less. Longer tenure, dependents and two-year contracts lower churn risk; month-to-month contracts and fiber optic raise it. These are associations in the data, not causes. Coefficients are effects given all other features and can look counter-intuitive (for example `Monthly Charges` is negative because the services priced into it are also in the model); the six "No internet service" columns duplicate `Internet Service = No` and share one coefficient.
 * Business effect (simulated): with the assumptions above (loss 890, offer cost 20, 30% saved) and threshold 0.05, the model contacts 71% of customers (recall 0.987, precision 0.369). Expected profit per 1000 customers: contact nobody 0, contact everyone 50872, model 55730, about +9.5% over contacting everyone. The model matters more when the offer is expensive: in the sensitivity table the gain over the best simple strategy grows from about 8k (c=10, p=0.3) to about 143k (c=80, p=0.3) on the train set.
 * Limitations: all money values are simulated from three assumed numbers, not from a real campaign; the true save rate can only be measured with an A/B test. The test set has 1409 customers, so the result is a single noisy estimate without a confidence interval. The class share and churn drivers come from a static dataset.
-* A/B test design: [how the effect of the retention offer would be measured; assumptions]
+* A/B test design: the effect of the retention offer would be measured as the difference in churn share between the offered and the control group of flagged customers (see Approach). The 30% save rate used in the profit simulation is an assumption that only such a test can confirm. Detecting only the break-even effect would need about 7000 customers per group, more than the whole dataset, so a real test should be planned for a realistic effect size.
 
 # Takeaway
 
