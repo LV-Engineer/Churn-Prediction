@@ -13,5 +13,7 @@ CAT_COLS = [
     "Tech Support", "Streaming TV", "Streaming Movies",
     "Contract", "Paperless Billing", "Payment Method",
 ]
+NUM_COLS = ["Tenure Months", "Monthly Charges", "Total Charges"]
+
 
 NOT_FEATURES = ["CLTV", "Total Charges"]
