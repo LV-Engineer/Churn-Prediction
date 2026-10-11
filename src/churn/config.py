@@ -14,6 +14,4 @@ CAT_COLS = [
     "Contract", "Paperless Billing", "Payment Method",
 ]
 NUM_COLS = ["Tenure Months", "Monthly Charges", "Total Charges"]
-
-
-NOT_FEATURES = ["CLTV", "Total Charges"]
+MODEL_NUM_COLS = ["Tenure Months", "Monthly Charges"]
