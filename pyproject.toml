@@ -1,7 +1,7 @@
 [project]
 name = "churn-prediction"
 version = "0.1.0"
-description = "Add your description here"
+description = "Customer churn prediction: classical ML and a PyTorch MLP, a decision threshold chosen by business cost, and an A/B test design"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
