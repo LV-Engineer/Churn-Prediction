@@ -38,20 +38,20 @@ Repo: https://github.com/LV-Engineer/Churn-Prediction
 
 # Approach
 
-* Baseline: [logistic regression]
-* Classical ML: [Random Forest, XGBoost, tuning, cross-validation]
-* Neural network: [PyTorch MLP: architecture, regularization, early stopping]
-* Validation: [stratified split / CV, fixed seed]
-* Metric choice and why: [ROC-AUC, recall at threshold]
-* Threshold selection: [tied to business cost]
+* Baseline: logistic regression, compared with a dummy classifier (always predicts the class prior).
+* Classical ML: Random Forest and XGBoost, tuned with `RandomizedSearchCV` (30 iterations) on the same cross-validation folds.
+* Neural network: PyTorch MLP, hidden layers (64, 32), ReLU, dropout 0.3, Adam with weight decay, early stopping on a validation split of each fold's training part.
+* Validation: stratified 80/20 train/test split (seed 42); 5-fold stratified cross-validation on train for all models; the test set is used once, at the end.
+* Metric choice and why: ROC-AUC to compare models (does not depend on the threshold and is not distorted by the 26.5% class share); recall and precision to see the trade-off at a threshold; expected profit to make the decision. Accuracy is not used: always predicting "stayed" already gives about 73%.
+* Threshold selection: chosen by expected profit on out-of-fold probabilities of train, using the simulated cost assumptions; break-even point is c / (p x V) = 20 / (0.3 x 890), about 0.075.
 * Interpretation: [feature importance / SHAP]
 * A/B test design (retention offer): [control vs treatment groups, success metric, sample size / power, hypothesis test, decision rule]. Design only, no real experiment data
 
 # Results
 
-* Best model vs baseline: [metric values]
-* Business effect (simulated): [e.g. customers saved per 1000 contacted, assumptions stated]
-* Limitations: [what the simulation does not prove]
+* Best model vs baseline: cross-validated ROC-AUC on train: dummy 0.500, logistic regression 0.858, MLP 0.857, tuned Random Forest 0.861, tuned XGBoost 0.865. The differences between the real models are smaller than the fold-to-fold spread (about 0.012), so no complex model is clearly better. Logistic regression is kept as the final model: simplest, explainable, equal quality. Test set: ROC-AUC 0.847.
+* Business effect (simulated): with the assumptions above (loss 890, offer cost 20, 30% saved) and threshold 0.05, the model contacts 71% of customers (recall 0.987, precision 0.369). Expected profit per 1000 customers: contact nobody 0, contact everyone 50872, model 55730, about +9.5% over contacting everyone. The model matters more when the offer is expensive: in the sensitivity table the gain over the best simple strategy grows from about 8k (c=10, p=0.3) to about 143k (c=80, p=0.3) on the train set.
+* Limitations: all money values are simulated from three assumed numbers, not from a real campaign; the true save rate can only be measured with an A/B test. The test set has 1409 customers, so the result is a single noisy estimate without a confidence interval. The class share and churn drivers come from a static dataset.
 * A/B test design: [how the effect of the retention offer would be measured; assumptions]
 
 # Takeaway
