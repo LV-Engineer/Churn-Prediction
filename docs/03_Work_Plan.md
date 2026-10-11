@@ -12,5 +12,4 @@ Work Plan and Checklist
 | 7 | Threshold selection tied to business cost | [x] | `notebooks/03_threshold_business.ipynb`, threshold 0.05 |
 | 8 | Interpretation (feature importance / SHAP) | [x] | `notebooks/04_interpretation.ipynb`; SHAP not used |
 | 9 | Design the A/B test for the retention offer (groups, metric, sample size, hypothesis test) and describe it in the brief | [x] | `notebooks/05_ab_test_design.ipynb` |
-| 10 | Clean notebook, README with the 5-part structure, requirements, seeds | [ ] |  |
-| 11 | Push to GitHub, pin the repo, update CV, Djinni, DOU, LinkedIn | [ ] |  |
+| 10 | Clean notebook, README with the 5-part structure, requirements, seeds | [x] | `README.md`; environment in `pyproject.toml` and `uv.lock`; seed 42 |
