@@ -21,7 +21,7 @@ The data files are **not committed** (`data/*` is in `.gitignore`). This README 
 uvx --with openpyxl --with pandas python -I -c "import pandas as pd; pd.read_excel('data/raw/Telco_customer_churn.xlsx').to_csv('data/raw/Telco_customer_churn.csv', index=False)"
 ```
 
-Files in `data/raw/` are never edited by hand. All cleaning is done in code, and its output goes to `data/processed/`.
+Files in `data/raw/` are never edited by hand. All cleaning is done in code (`clean()` in `src/churn/data.py`) every time the data is loaded, so no cleaned copy is stored.
 
 ## Structure
 
@@ -29,7 +29,6 @@ Files in `data/raw/` are never edited by hand. All cleaning is done in code, and
 data/
   README.md     # this file (tracked)
   raw/          # original data (ignored)
-  processed/    # cleaned data, reproducible from code (ignored)
 ```
 
 ## Facts about the raw file
