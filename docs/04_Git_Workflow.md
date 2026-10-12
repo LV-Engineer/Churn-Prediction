@@ -126,13 +126,7 @@ Suggested tags: `v0.1-baseline`, `v0.2-classical-models`, `v0.3-mlp`, `v1.0`.
 
 Rule: `amend`/`rebase` only for commits that are not pushed yet. After a push use `revert`.
 
-## 8. Rules for working with Claude Code
-
-- Claude proposes commits and messages; commits and pushes happen only after an explicit "apply this".
-- Before each commit, review `git status` and `git diff` together.
-- One logical change per commit, even if the session produced a lot of changes.
-
-## 9. Checklist for a healthy history
+## 8. Checklist for a healthy history
 
 - [ ] more than 30 meaningful commits by the end of the project
 - [ ] each plan step visible as a branch/merge
