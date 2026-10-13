@@ -132,5 +132,5 @@ Rule: `amend`/`rebase` only for commits that are not pushed yet. After a push us
 - [x] each plan step visible as a branch/merge (pull requests #1 to #14; steps 4 and 5 were merged together in `feat/modeling`)
 - [ ] commit messages follow the convention (two exceptions: `0bcea0a` and `c1d3999`, "Update ..." messages from edits in the GitHub web editor; already merged, left as is)
 - [x] no data, models or secrets in history (only `data/README.md` is tracked in `data/`; no `.csv`, `.xlsx`, `.pkl` or `.env` in any commit)
-- [ ] tags at the main milestones (only `v1.0` exists, on the merge of PR #13; the intermediate tags were not created)
+- [x] tags at the main milestones (`v0.1-baseline`, `v0.2-classical-models`, `v0.3-mlp`, `v1.0`; `v1.0` is on the merge of PR #13, one merge behind the final `main`)
 - [ ] the experiment log and the work plan are updated in commits alongside the code (the log yes, one commit per experiment group; the work plan was ticked in one batch at the end)
