@@ -13,17 +13,17 @@ Goal: keep the **full history** of the project (many small commits that tell the
 
 `main` is always in a working state. Each step of `03_Work_Plan.md` gets a short branch named `<type>/<short-name>` (lowercase, words separated by hyphens). The `<type>` is the same set of prefixes as in commit messages (see section 3).
 
-| Plan step | Branch |
+| Plan step | Branch (as actually used) |
 | --- | --- |
-| 1-2 Problem definition, EDA | `feat/eda` |
+| 1 Business problem and data | `docs/problem-definition` |
+| 2 EDA | `feat/eda` |
 | 3 Preprocessing pipeline | `feat/preprocessing` |
-| 4 Baseline | `feat/baseline` |
-| 5 RF / XGBoost | `feat/classical-models` |
+| 4-5 Baseline, RF / XGBoost | `feat/modeling` |
 | 6 PyTorch MLP | `feat/mlp` |
 | 7 Threshold by business cost | `feat/threshold` |
 | 8 Interpretation | `feat/interpretation` |
 | 9 A/B test design | `docs/ab-test-design` |
-| 10 README, cleanup | `docs/readme` |
+| 10 README, cleanup | `docs/final-readme` |
 
 Other examples: `fix/scaler-leakage`, `chore/add-xgboost`, `refactor/pipeline-module`.
 
@@ -128,9 +128,9 @@ Rule: `amend`/`rebase` only for commits that are not pushed yet. After a push us
 
 ## 8. Checklist for a healthy history
 
-- [ ] more than 30 meaningful commits by the end of the project
-- [ ] each plan step visible as a branch/merge
-- [ ] commit messages follow the convention
-- [ ] no data, models or secrets in history
-- [ ] tags at the main milestones
-- [ ] the experiment log and the work plan are updated in commits alongside the code
+- [x] more than 30 meaningful commits by the end of the project (52 commits without merges)
+- [x] each plan step visible as a branch/merge (pull requests #1 to #14; steps 4 and 5 were merged together in `feat/modeling`)
+- [ ] commit messages follow the convention (two exceptions: `0bcea0a` and `c1d3999`, "Update ..." messages from edits in the GitHub web editor; already merged, left as is)
+- [x] no data, models or secrets in history (only `data/README.md` is tracked in `data/`; no `.csv`, `.xlsx`, `.pkl` or `.env` in any commit)
+- [ ] tags at the main milestones (only `v1.0` exists, on the merge of PR #13; the intermediate tags were not created)
+- [ ] the experiment log and the work plan are updated in commits alongside the code (the log yes, one commit per experiment group; the work plan was ticked in one batch at the end)
